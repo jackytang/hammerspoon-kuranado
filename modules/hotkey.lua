@@ -29,7 +29,7 @@ canvas:appendElements({
 })
 
 function formatText()
-    
+
     -- 加载所有绑定的快捷键
     local hotkeys = hs.hotkey.getHotkeys()
     local renderText = {}
@@ -41,8 +41,8 @@ function formatText()
     local windowManagement = {}
     table.insert(windowManagement, {msg = '[Window Management:]'})
     -- 密码粘贴类
-    local passwordPaste = {}
-    table.insert(passwordPaste, {msg = '[Password Paste:]'})
+    -- local passwordPaste = {}
+    -- table.insert(passwordPaste, {msg = '[Password Paste:]'})
 
     -- 每行最多 40 个字符
     local MAX_LEN = 40
@@ -58,9 +58,9 @@ function formatText()
             table.insert(windowManagement, {msg = v.msg})
         end
         -- 以 ⌘⌃ 开头，表示为密码粘贴快捷键
-        if v.idx == '⌘⌃V' then
-            table.insert(passwordPaste, {msg = v.msg})
-        end
+        -- if v.idx == '⌘⌃V' then
+            -- table.insert(passwordPaste, {msg = v.msg})
+        -- end
     end
 
     hotkeys = {}
@@ -70,9 +70,9 @@ function formatText()
     for k, v in ipairs(windowManagement) do
         table.insert(hotkeys, {msg = v.msg})
     end
-    for k, v in ipairs(passwordPaste) do
-        table.insert(hotkeys, {msg = v.msg})
-    end
+    -- for k, v in ipairs(passwordPaste) do
+        -- table.insert(hotkeys, {msg = v.msg})
+    -- end
 
     -- 文本定长
     for k, v in ipairs(hotkeys) do
@@ -96,11 +96,11 @@ end
 
 function drawText(renderText)
     -- 每列最多 20 行
-    local MAX_LINE_NUM = 20
+    local MAX_LINE_NUM = 21
     local w = 0
     local h = 0
     -- 文本距离分割线的距离
-    local SEPRATOR_W = 5;
+    local SEPRATOR_W = 8;
 
     -- 每一列需要显示的文本
     local column = ''
@@ -111,7 +111,7 @@ function drawText(renderText)
         else
             column = column .. line .. '  \n'
         end
-        -- k mod MAX_LINE_NUM 
+        -- k mod MAX_LINE_NUM
         if math.fmod(k, MAX_LINE_NUM) == 0 then
             local itemText = styleText(column)
             local size = canvas:minimumTextSize(itemText)
@@ -128,7 +128,7 @@ function drawText(renderText)
             canvas:appendElements({
                 type = "segments",
                 closed = false,
-                -- strokeColor = { blue = 1 }, 
+                -- strokeColor = { blue = 1 },
                 strokeColor = { hex = '#0096FA' },
                 action = "stroke",
                 strokeWidth = 2,
@@ -148,7 +148,7 @@ function drawText(renderText)
         })
         column = nil
     end
-    
+
     -- 居中显示
     canvas:frame({x = COORIDNATE_X - w / 2, y = COORIDNATE_Y - h / 2, w = w, h = h})
 end
@@ -174,7 +174,7 @@ function toggleHotkeysShow()
     if show then
         -- 0.3s 过渡
         canvas:hide(.3)
-    else 
+    else
         -- 0.3s 过渡
         canvas:show(.3)
     end
@@ -191,7 +191,7 @@ drawText(formatText())
 -- ⌥/ 显示/隐藏快捷键列表
 hs.hotkey.bind(hotkey.prefix, hotkey.key, toggleHotkeysShow)
 -- Esc 关闭快捷键列表（仅在快捷键列表已显示情况下生效）
--- hs.hotkey.bind({'zero'}, 'escape',  closeHotKeyShow)
+hs.hotkey.bind({'zero'}, 'escape',  closeHotKeyShow)
 
 -- 禁用快捷键alert消息
 hs.hotkey.alertDuration = 0

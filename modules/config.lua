@@ -16,14 +16,24 @@ defaultConfig = {
         enable = true,
     },
     {
+        module = 'modules.keyboard',
+        name = '蓝牙键盘',
+        enable = true
+    },
+    {
+        module = "modules.hotkey",
+        name = "快捷键列表查看",
+        enable = true,
+    },
+    {
         module = "modules.emoji",
         name = "表情包搜索",
-        enable = true,
+        enable = false,
     },
     {
         module = "modules.password",
         name = "密码粘贴",
-        enable = true,
+        enable = false,
     },
     {
         module = "modules.input-method",
@@ -33,7 +43,7 @@ defaultConfig = {
     {
         module = "modules.network",
         name = "实时网速",
-        enable = true,
+        enable = false,
     },
     {
         module = "modules.keystroke-visualizer",
@@ -46,11 +56,6 @@ defaultConfig = {
         enable = false,
     },
     {
-        module = "modules.hotkey",
-        name = "快捷键列表查看",
-        enable = true,
-    },
-    {
         module = "modules.remind",
         name = "提醒下班",
         enable = false,
@@ -58,7 +63,7 @@ defaultConfig = {
     {
         module = "modules.update",
         name = "自动检查更新",
-        enable = true,
+        enable = false,
     },
 }
 
